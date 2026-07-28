@@ -7,8 +7,35 @@ import plotly.express as px
 st.title("Race Simulation & Strategy")
 st.write("""
 This tool uses a Monte Carlo simulation engine to simulate an F1 race lap-by-lap.
-You can adjust the overtaking difficulty (e.g. Monaco vs. Spa) and DNF rates to see how they impact win probabilities.
+Select a circuit preset to load realistic overtaking values, or adjust the sliders manually to run your custom scenarios!
 """)
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
+
+# Load circuits data
+@st.cache_data
+def load_circuits():
+    return pd.read_csv(os.path.join(DATA_DIR, 'f1_circuits.csv'))
+
+circuits_df = load_circuits()
+circuits_dict = dict(zip(circuits_df['circuit_name'], circuits_df['circuit_id']))
+
+# Pre-defined Overtaking Factors
+overtaking_presets = {
+    'monaco': 0.1,
+    'hungaroring': 0.25,
+    'marina_bay': 0.3,
+    'albert_park': 0.4,
+    'catalunya': 0.45,
+    'yas_marina': 0.5,
+    'silverstone': 0.65,
+    'monza': 0.7,
+    'bahrain': 0.7,
+    'interlagos': 0.75,
+    'baku': 0.75,
+    'spa': 0.8,
+    'red_bull_ring': 0.85
+}
 
 # Simplified simulation engine for dashboard use
 def run_simulation(drivers, grid, pace, dnf_rates, laps=50, overtaking_factor=0.5, sims=500):
@@ -59,8 +86,80 @@ def run_simulation(drivers, grid, pace, dnf_rates, laps=50, overtaking_factor=0.
 
 # Configuration sidebar
 st.sidebar.header("Simulation Settings")
+
+# Circuit selection preset
+default_index = 0
+sorted_names = sorted(circuits_df['circuit_name'].unique())
+for idx, name in enumerate(sorted_names):
+    if "Spa-Francorchamps" in name or "Spa" in name:
+        default_index = idx
+        break
+
+selected_circuit_name = st.sidebar.selectbox("Select Circuit Preset", sorted_names, index=default_index)
+selected_circuit_id = circuits_dict[selected_circuit_name]
+
+# Get preset or default to 0.5
+default_overtaking = overtaking_presets.get(selected_circuit_id, 0.5)
+
+# Detailed preset reasons/explanations
+overtaking_reasons = {
+    'monaco': "Tight street track with narrow lanes. Passing is virtually impossible.",
+    'hungaroring': "Twisty, low-speed corners and a short straight. Often called 'Monaco without walls'.",
+    'marina_bay': "Bumpy, slow street circuit with many corners, making passing quite difficult.",
+    'albert_park': "A semi-street circuit. Overtaking is tricky, though layout changes have helped.",
+    'catalunya': "Historically hard to overtake due to dirty air, but a long pit straight offers DRS passing.",
+    'yas_marina': "Long straights help passing under DRS, but technical low-speed sections limit overtaking.",
+    'silverstone': "Wide track with sweeping fast turns allowing drivers to take multiple lines and overtake.",
+    'monza': "The Temple of Speed. Long straights and huge slipstreams make passing highly common.",
+    'bahrain': "Multiple long straights with heavy braking zones make it a classic overtaking track.",
+    'interlagos': "Short lap with a massive uphill main straight allowing dramatic slipstreams.",
+    'baku': "Massive 2km main straight facilitates easy DRS drafting, despite tight castle section.",
+    'spa': "Huge DRS zones at Kemmel Straight and Blanchimont allow high-speed overtaking.",
+    'red_bull_ring': "Short track with three consecutive DRS zones and heavy braking zones."
+}
+
+reason = overtaking_reasons.get(selected_circuit_id, "Standard race circuit layout with average overtaking characteristics.")
+st.sidebar.info(f"ℹ️ **Preset loaded**: {reason}")
+
+st.sidebar.write("---")
+
 laps = st.sidebar.slider("Number of Laps", 10, 80, 50)
-overtaking = st.sidebar.slider("Overtaking Difficulty (0 = Monaco, 1 = Spa)", 0.05, 1.0, 0.5)
+
+# Overtaking slider (initialized to the preset default)
+overtaking = st.sidebar.slider(
+    "Ease of Overtaking", 
+    0.05, 1.0, 
+    value=default_overtaking,
+    help="Controls how easily drivers can pass each other. Circuit presets set realistic defaults, but you can adjust this value to test custom scenarios."
+)
+
+# Visual category for current slider value
+if overtaking <= 0.15:
+    category = "🔴 Very Difficult"
+elif overtaking <= 0.35:
+    category = "🟠 Difficult"
+elif overtaking <= 0.60:
+    category = "🟡 Moderate"
+elif overtaking <= 0.80:
+    category = "🟢 Easy"
+else:
+    category = "🔵 Very Easy"
+
+st.sidebar.markdown(f"### **`{overtaking:.2f}` {category}**")
+
+st.sidebar.markdown("""
+<div style="font-size: 0.85rem; color: #888;">
+Controls how easily drivers can pass each other. Circuit presets set realistic defaults, but you can adjust this value to test custom scenarios.
+</div>
+
+**How it affects the simulation:**
+* 📉 **Lower values** → Starting grid position matters more.
+* 📈 **Higher values** → Fast drivers can recover from poor qualifying.
+* 🔄 **Higher values** → More position changes during the race.
+""", unsafe_allow_html=True)
+
+st.sidebar.write("---")
+
 sims = st.sidebar.slider("Number of Simulations", 100, 2000, 500)
 
 drivers = ["Verstappen", "Norris", "Leclerc", "Piastri", "Sainz", "Hamilton"]
@@ -90,7 +189,7 @@ if st.button("🎲 Run Monte Carlo Simulation"):
         fig = px.bar(
             probs_df, x='Probability', y='Driver', 
             orientation='h', 
-            title="Win Probabilities from Monte Carlo Simulation",
+            title=f"Win Probabilities from Monte Carlo Simulation ({selected_circuit_name})",
             labels={'Probability': 'Win Chance', 'Driver': 'Driver'},
             color='Probability',
             color_continuous_scale='Reds'
