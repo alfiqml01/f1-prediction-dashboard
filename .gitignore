@@ -15,10 +15,6 @@ env/
 .vscode/
 .idea/
 
-# Saved models
-models/*.pkl
-models/*.joblib
-
 # Output files
 outputs/
 
