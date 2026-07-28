@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Saved models
+models/*.pkl
+models/*.joblib
+
+# Output files
+outputs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data (optional - uncomment if you don't want to track CSVs)
+# data/
