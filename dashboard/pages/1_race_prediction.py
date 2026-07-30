@@ -14,21 +14,32 @@ MODELS_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'models')
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
 
 # Check if model files exist
-required_models = ['xgboost.pkl', 'imputer.pkl', 'scaler.pkl']
+available_model_files = {
+    'XGBoost': 'xgboost.pkl',
+    'Logistic Regression': 'logistic_regression.pkl',
+}
+required_models = list(available_model_files.values()) + ['imputer.pkl', 'scaler.pkl']
 models_exist = all(os.path.exists(os.path.join(MODELS_DIR, f)) for f in required_models)
 
 if not models_exist:
     st.warning("⚠️ Machine Learning models have not been trained yet. Please run the training notebooks/scripts first or check back later.")
 else:
-    # Load model, imputer, scaler
+    st.sidebar.subheader("Model Selection")
+    selected_model_name = st.sidebar.selectbox(
+        "Choose a model",
+        list(available_model_files.keys()),
+        index=0,
+    )
+
     @st.cache_resource
-    def load_prediction_assets():
-        model = joblib.load(os.path.join(MODELS_DIR, 'xgboost.pkl'))
+    def load_prediction_assets(model_key):
+        model_path = available_model_files[model_key]
+        model = joblib.load(os.path.join(MODELS_DIR, model_path))
         imputer = joblib.load(os.path.join(MODELS_DIR, 'imputer.pkl'))
         scaler = joblib.load(os.path.join(MODELS_DIR, 'scaler.pkl'))
         return model, imputer, scaler
 
-    model, imputer, scaler = load_prediction_assets()
+    model, imputer, scaler = load_prediction_assets(selected_model_name)
     
     # Load driver options
     drivers_df = pd.read_csv(os.path.join(DATA_DIR, 'f1_drivers.csv'))
