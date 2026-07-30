@@ -255,3 +255,10 @@ if __name__ == '__main__':
         non_null = featured[f].notna().sum()
         pct = non_null / len(featured) * 100
         print(f"  {f:40s} -> {pct:.1f}% non-null")
+
+featured.to_csv(
+    "featured_data_full.csv",
+    index=False
+)
+
+print("Export complete!")
