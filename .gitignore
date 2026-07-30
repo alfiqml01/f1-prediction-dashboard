@@ -20,7 +20,8 @@ env/
 *.pdf
 
 # Output files
-outputs/
+outputs/*
+!outputs/*.csv
 
 # OS files
 .DS_Store
