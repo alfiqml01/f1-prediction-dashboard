@@ -87,4 +87,3 @@ This interactive platform lets you explore the data-driven side of Formula 1. Na
 * **🧬 Driver Clustering**: Discover driver style archetypes using unsupervised machine learning.
 """)
 
-st.info("💡 **Tip for beginners**: Each page contains simplified definitions and visual guides explaining how the underlying data science algorithms work!")

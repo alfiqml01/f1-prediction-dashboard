@@ -3,12 +3,6 @@
 NOTEBOOK 03: DRIVER PERFORMANCE ANALYSIS
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to compare drivers fairly using "Teammate Head-to-Head"
-    2. How to measure consistency using Standard Deviation
-    3. How to analyze overtaking ability (Position Gain)
-    4. How to adjust stats for different eras (Era-Adjusted Ranking)
-
 WHY THIS MATTERS:
     In F1, a driver's speed is heavily masked by how good their car is.
     We need metrics that look beyond wins to see who is actually driving well.

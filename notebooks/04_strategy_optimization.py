@@ -3,12 +3,6 @@
 NOTEBOOK 04: STRATEGY OPTIMIZATION & MONTE CARLO SIMULATION
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to use historical grid position data to estimate finishing position probabilities
-    2. How to model random events like DNFs (retirements)
-    3. How to build a Monte Carlo Simulation (running scenarios 10,000 times)
-    4. How to analyze pit stop retirements and mechanical reliability
-
 WHY MONTE CARLO?
     A single F1 race has too many random factors: crashes, mechanical failures,
     safety cars, overtaking. A deterministic formula can't capture this.

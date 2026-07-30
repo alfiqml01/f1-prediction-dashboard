@@ -10,11 +10,6 @@ HOW IT WORKS:
     1. load_all_data()   → Loads all 8 CSV files into a dictionary
     2. build_master_df() → Merges them into one big DataFrame for analysis
     3. Helper functions  → Get specific slices of data (e.g., modern era only)
-
-BEGINNER NOTES:
-    - A DataFrame is like an Excel spreadsheet in Python (rows & columns)
-    - pd.merge() is like VLOOKUP in Excel — it joins two tables on a shared key
-    - We use os.path to build file paths that work on any operating system
 """
 
 import os

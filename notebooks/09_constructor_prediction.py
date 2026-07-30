@@ -3,12 +3,6 @@
 NOTEBOOK 09: CONSTRUCTOR SUCCESS PREDICTION
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to aggregate data at the Team (Constructor) level
-    2. How to model team-based championship outcomes (Top 3 finish)
-    3. How to create constructor-level features (driver quality, wins in last 3 seasons)
-    4. How to evaluate classifier models on constructor success
-
 WHY CONSTRUCTOR PREDICTION?
     In F1, teams compete for the Constructors' Championship, which determines their
     share of the sport's prize money. Predicting constructor success is a key task

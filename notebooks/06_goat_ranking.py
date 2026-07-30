@@ -3,12 +3,6 @@
 NOTEBOOK 06: OBJECTIVE GOAT INDEX & PCA RANKING
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to normalize statistics across different eras of sport (e.g. 1950s vs 2020s)
-    2. How to design a composite weighted score to rank individuals
-    3. How to use PCA (Principal Component Analysis) to find hidden dimensions of performance
-    4. How to run a sensitivity analysis on your ranking weights
-
 WHY ERA ADJUSTMENT MATTERS:
     In F1's early decades, cars were highly unreliable, calendars had only 7-10 races,
     and drivers points systems were totally different (e.g. 8 points for a win vs 25 today).

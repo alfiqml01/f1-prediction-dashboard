@@ -3,13 +3,6 @@
 NOTEBOOK 02: RACE WINNER PREDICTION
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to prepare data for Machine Learning (feature selection & imputation)
-    2. How to split time-series data without "leakage"
-    3. How to train multiple models (Logistic Regression, Random Forest, XGBoost, LightGBM)
-    4. How to evaluate models using sports-specific logic
-    5. How to explain model predictions using Feature Importance
-
 WHY NOT JUST ACCURACY?
     In F1, only 1 driver wins out of 20. If a model always predicts "NOT WINNER",
     it has 95% accuracy! But it's 100% useless. We must look at ROC-AUC, Precision,

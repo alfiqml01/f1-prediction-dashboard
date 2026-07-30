@@ -3,12 +3,6 @@
 NOTEBOOK 05: CHAMPIONSHIP PREDICTION
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to build cumulative structures (running totals) in pandas
-    2. How to forecast a season's ending using historical points accumulation
-    3. How to train a classifier to predict the final champion from mid-season standings
-    4. How to evaluate predictions using Backtesting
-
 WHY MID-SEASON FORECASTING?
     At the start of the season, anyone can win. By race 10, the picture is clearer.
     We build a machine learning model that looks at standings at any round, calculates

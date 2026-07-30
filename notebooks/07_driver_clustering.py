@@ -3,13 +3,6 @@
 NOTEBOOK 07: DRIVER CLUSTERING & ARCHETYPES
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to group data points without labels (Unsupervised Learning)
-    2. How to use K-Means to divide drivers into K clusters
-    3. How to use DBSCAN to find natural groupings and noise/outliers
-    4. How to profile clusters to find "Archetypes" (e.g. Dominators vs Backmarkers)
-    5. How to visualize multidimensional data in 2D using PCA
-
 WHY CLUSTERING?
     Instead of ranking drivers from 1 to N, we want to see if drivers naturally fall into
     different "types" or "archetypes". For example, is there a cluster of highly consistent point scorers?

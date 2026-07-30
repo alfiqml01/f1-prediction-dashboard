@@ -3,12 +3,6 @@
 NOTEBOOK 08: DETAILED RACE SIMULATION ENGINE
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to construct a lap-by-lap simulation model
-    2. How to include track characteristics (Monaco overtaking vs Spa overtaking)
-    3. How to combine driver capability and constructor performance into a single "pace index"
-    4. How to represent uncertainty (DNFs and random pace variations)
-
 WHY LAP-BY-LAP SIMULATION?
     While prediction models (like Notebook 02) give static win probabilities,
     simulation engines let us watch the race unfold, tracking live positions,

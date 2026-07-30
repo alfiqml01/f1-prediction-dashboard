@@ -3,13 +3,6 @@
 NOTEBOOK 01: DATA EXPLORATION & CLEANING
 ================================================================================
 
-WHAT YOU WILL LEARN:
-    1. How to load and inspect raw data
-    2. How to identify and handle missing values
-    3. How to merge multiple datasets
-    4. How to create exploratory visualizations
-    5. How to understand your data before building models
-
 WHY THIS MATTERS:
     "Garbage in, garbage out" — if your data is messy, your models will be bad.
     Data exploration is ALWAYS the first step in any data science project.
